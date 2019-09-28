@@ -1,0 +1,47 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Rendezvous index{% endblock %}
+
+{% block body %}
+    <h4>Listes des Rendez vous</h4>
+
+<div class="content table-responsive table-full-width">
+    <table class="table  table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Datecreation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rendezvous in rendezvouses %}
+            <tr>
+                <td>{{ rendezvous.id }}</td>
+                <td>{{ rendezvous.description }}</td>
+                <td>{{ rendezvous.datecreation ? rendezvous.datecreation|date('Y-m-d') : '' }}</td>
+                <td>
+
+
+                    <a  href="{{ path('rendezvous_show', {'id': rendezvous.id}) }}"><i class="icon_plus_alt2"></i>show</a>
+                    <a  href="{{ path('rendezvous_edit', {'id': rendezvous.id}) }}">edit</a>
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+
+    </table>
+</div>
+
+
+    <button   href="{{ path('rendezvous_new') }}">Ajouter</button>
+
+{% endblock %}
